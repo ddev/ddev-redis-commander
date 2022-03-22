@@ -6,16 +6,20 @@ This uses Redis Commander to provide a web interface to a redis service on DDEV.
 
 ## Requirements
 
-The redis service must be available, see `ddev get drud/ddev-redis`.
+The redis service must be available, use `ddev get drud/ddev-redis`.
 
 ## Installation
 
 `ddev get drud/ddev-redis-commander && ddev restart`
 
-Then `ddev describe` will show you how to access the service.
+Then `ddev describe` will show you how to access the service at `https://<project>.ddev.site:1359`.
 
+## Links
 
-**Contributed by [@Graloth](https://github.com/Graloth)**
+* [Multiplatform Images](https://github.com/joeferner/redis-commander/pkgs/container/redis-commander)
+* GitHub repo: [joeferner/redis-commander](https://github.com/joeferner/redis-commander)
+
+**Originally Contributed by [@Graloth](https://github.com/Graloth) in [ddev-contrib](https://github.com/drud/ddev-contrib/tree/master/docker-compose-services/redis-commander)**
 ** Maintained by ... **
 
 
