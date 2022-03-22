@@ -24,9 +24,8 @@ teardown() {
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
   ddev restart
-  # Do something here to verify functioning extra service
-  # For extra credit, use a real CMS with actual config.
-  # ddev exec "curl -s elasticsearch:9200" | grep "${PROJNAME}-elasticsearch"
+  URL=$(ddev describe -j ${PROJNAME} | jq -r .raw.services.\"redis-commander\".http_url)
+  curl -s --fail ${URL} | grep "<title>Redis Commander: Home"
 }
 
 @test "install from release" {
