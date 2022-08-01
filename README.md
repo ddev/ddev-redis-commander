@@ -20,6 +20,7 @@ Then `ddev describe` will show you how to access the service at `https://<projec
 * GitHub repo: [joeferner/redis-commander](https://github.com/joeferner/redis-commander)
 
 **Originally Contributed by [@Graloth](https://github.com/Graloth) in [ddev-contrib](https://github.com/drud/ddev-contrib/tree/master/docker-compose-services/redis-commander)**
-** Maintained by [@rfay](https://github.com/rfay) and looking for a maintainer that actually uses this, see [#1](https://github.com/drud/ddev-redis-commander/issues/1) **
+
+**Maintained by [@rfay](https://github.com/rfay) and looking for a maintainer that actually uses this, see [#1](https://github.com/drud/ddev-redis-commander/issues/1).**
 
 
