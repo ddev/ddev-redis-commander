@@ -1,5 +1,5 @@
 #ddev-generated
-version: '3.6'
+
 services:
   redis-commander:
     container_name: ddev-${DDEV_SITENAME}-redis-commander
