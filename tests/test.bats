@@ -9,7 +9,7 @@ setup() {
   cd "${TESTDIR}"
   ddev config --project-name=${PROJNAME}
   ddev start -y >/dev/null
-  ddev get drud/ddev-redis >/dev/null
+  ddev get ddev/ddev-redis >/dev/null
 }
 
 teardown() {
@@ -32,8 +32,8 @@ teardown() {
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get drud/ddev-redis-commander with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get drud/ddev-redis-commander
+  echo "# ddev get ddev/ddev-redis-commander with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev get ddev/ddev-redis-commander
   ddev restart >/dev/null
   URL=$(ddev describe -j ${PROJNAME} | jq -r .raw.services.\"redis-commander\".http_url)
   curl -s --fail ${URL} | grep "<title>Redis Commander: Home"
