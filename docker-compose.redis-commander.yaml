@@ -23,4 +23,4 @@ services:
     depends_on:
       - redis
     healthcheck:
-      timeout: 10s
+      disable: true
