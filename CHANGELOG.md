@@ -11,7 +11,7 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) for this proje
 
 ---
 
-## [1.0.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.0.0) - 2023-03-??
+## [v1.0.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.0.0) - 2023-03-08
 [_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v0.1.2...v1.0.0)
 
 
@@ -22,7 +22,7 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) for this proje
 
 ---
 
-## [0.1.2](https://github.com/ddev/ddev-redis-commander/releases/tag/v0.1.2) - 2023-02-03
+## [v0.1.2](https://github.com/ddev/ddev-redis-commander/releases/tag/v0.1.2) - 2023-02-03
 [_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v0.1.1...v0.1.2)
 
 
@@ -34,7 +34,7 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) for this proje
 ---
 
 
-## [0.1.1](https://github.com/ddev/ddev-redis-commander/releases/tag/v0.1.1) - 2022-06-17
+## [v0.1.1](https://github.com/ddev/ddev-redis-commander/releases/tag/v0.1.1) - 2022-06-17
 [_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v0.1.0...v0.1.1)
 
 
@@ -44,7 +44,7 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) for this proje
 
 ---
 
-## [0.1.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v0.1.0) - 2022-03-22
+## [v0.1.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v0.1.0) - 2022-03-22
 [_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/0.0.1...v0.1.0)
 
 ### Added
