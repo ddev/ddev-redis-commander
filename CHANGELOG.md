@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## SemVer public API
 
-The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) for this project is defined by the files `docker-compose.redis-commander.yaml` and `install.yaml`.
+The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) of this project is defined by the `install.yaml` file and `project_files` listed in the `install.yaml` file.
 
 ---
 

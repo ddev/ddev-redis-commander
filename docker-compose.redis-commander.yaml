@@ -1,5 +1,6 @@
 #ddev-generated
-
+# Remove the line above if you don't want this file to be overwritten
+# when you run ddev get ddev/ddev-redis-commander
 services:
   redis-commander:
     container_name: ddev-${DDEV_SITENAME}-redis-commander
