@@ -11,6 +11,18 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) of this projec
 
 ---
 
+## [v1.1.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.1.0) - 2023-07-21
+[_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v1.0.0...v1.1.0)
+
+
+### Changed
+
+- Add dependency on redis add-on for DDEV v1.22.0+
+
+
+---
+
+
 ## [v1.0.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.0.0) - 2023-03-08
 [_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v0.1.2...v1.0.0)
 
