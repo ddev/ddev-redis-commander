@@ -6,7 +6,6 @@ services:
     container_name: ddev-${DDEV_SITENAME}-redis-commander
     hostname: ${DDEV_SITENAME}-redis-commander
     image: ghcr.io/joeferner/redis-commander:latest
-    restart: always
     expose:
       - 1358
     labels:
