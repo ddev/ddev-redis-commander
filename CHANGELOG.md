@@ -17,7 +17,7 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) of this projec
 
 ### Changed
 
-- Do not always restart container (@see [#14](https://github.com/ddev/ddev-redis-commander/issues/14))
+- Do not always restart container (see [#14](https://github.com/ddev/ddev-redis-commander/issues/14))
 
 
 ---
