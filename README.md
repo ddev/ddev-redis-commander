@@ -6,13 +6,40 @@ This uses Redis Commander to provide a web interface to a redis service on DDEV.
 
 ## Requirements
 
-The redis service must be available, use `ddev get ddev/ddev-redis`.
+Before installing this add-on, the Redis service must be available, and you have to use one of the following add-ons:
+
+- [`ddev/ddev-redis` (Redis 6)](https://github.com/ddev/ddev-redis)
+- [`ddev/ddev-redis-7` (Redis 7)](https://github.com/ddev/ddev-redis-7)
+
+To install one of them, run `ddev add-on get ddev/ddev-redis` or `ddev add-on get ddev/ddev-redis-7`
 
 ## Installation
 
-`ddev get ddev/ddev-redis && ddev get ddev/ddev-redis-commander && ddev restart`
+`ddev add-on get ddev/ddev-redis-commander && ddev restart`
 
-Then `ddev describe` will show you how to access the service at `https://<project>.ddev.site:1359`.
+## Usage
+
+Access the Redis Commander web interface by running `ddev redis-commander`.
+
+### Redis 7 password
+
+At the time of writing, Redis 7 requires a password to connect to it.
+
+In order to connect to Redis 7, you have to set the `REDIS_PASSWORD` environment variable in the `redis-commander` 
+service. 
+
+One way of doing this is to create a `docker-compose.redis_password.yaml` file with the following content:
+
+```yaml
+services:
+    redis-commander:
+        environment:
+            - REDIS_PASSWORD=redis
+```
+You may have to adjust the password according to your Redis 7 configuration (`redis` is the default one).
+
+Then, run `ddev restart` to apply the changes.
+
 
 ## Links
 
