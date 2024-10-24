@@ -6,13 +6,31 @@ This uses Redis Commander to provide a web interface to a redis service on DDEV.
 
 ## Requirements
 
-The redis service must be available, use `ddev get ddev/ddev-redis`.
+The [redis service](https://github.com/ddev/ddev-redis) must be available. The installation instructions include adding that add-on.
 
 ## Installation
 
-`ddev get ddev/ddev-redis && ddev get ddev/ddev-redis-commander && ddev restart`
+For DDEV v1.23.5 or above run
 
-Then `ddev describe` will show you how to access the service at `https://<project>.ddev.site:1359`.
+```sh
+ddev add-on get ddev/ddev-redis
+ddev add-on get ddev/ddev-redis-commander
+```
+
+For earlier versions of DDEV run
+
+```sh
+ddev get ddev/ddev-redis
+ddev get ddev/ddev-redis-commander
+```
+
+Then restart your project
+
+```sh
+ddev restart
+```
+
+After installation, `ddev describe` will show you how to access the service at `https://<project>.ddev.site:1359`.
 
 ## Links
 
