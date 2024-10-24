@@ -11,13 +11,24 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) of this projec
 
 ---
 
+## [v1.3.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.3.0) - 2023-10-24
+[_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v1.2.0...v1.3.0)
+
+
+### Added
+
+- Add `redis-commander` command (see [#18](https://github.com/ddev/ddev-redis-commander/pull/18))
+
+
+---
+
 ## [v1.2.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.2.0) - 2023-10-06
 [_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v1.1.0...v1.2.0)
 
 
 ### Changed
 
-- Do not always restart container (see [#14](https://github.com/ddev/ddev-redis-commander/issues/14))
+- Do not always restart container (see [#15](https://github.com/ddev/ddev-redis-commander/pull/15))
 
 
 ---

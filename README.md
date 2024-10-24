@@ -11,11 +11,34 @@ Before installing this add-on, the Redis service must be available, and you have
 - [`ddev/ddev-redis` (Redis 6)](https://github.com/ddev/ddev-redis)
 - [`ddev/ddev-redis-7` (Redis 7)](https://github.com/ddev/ddev-redis-7)
 
-To install one of them, run `ddev add-on get ddev/ddev-redis` or `ddev add-on get ddev/ddev-redis-7`
+For DDEV v1.23.5 or above run 
+
+`ddev add-on get ddev/ddev-redis` or `ddev add-on get ddev/ddev-redis-7`
+
+For earlier versions of DDEV run 
+
+`ddev get ddev/ddev-redis` or `ddev get ddev/ddev-redis-7`
+
 
 ## Installation
 
-`ddev add-on get ddev/ddev-redis-commander && ddev restart`
+For DDEV v1.23.5 or above run
+
+```bash
+ddev add-on get ddev/ddev-redis-commander
+```
+
+For earlier versions of DDEV run
+
+```bash
+ddev get ddev/ddev-redis-commander
+```
+
+Then restart your project
+
+```bash
+ddev restart
+```
 
 ## Usage
 
