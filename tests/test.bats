@@ -40,9 +40,17 @@ setup() {
   # Redis add-on is required for Redis Commander
   run ddev add-on get ddev/ddev-redis
   assert_success
+
+  export HAS_OPTIMIZED_CONFIG=false
 }
 
 health_checks() {
+  if [ "$HAS_OPTIMIZED_CONFIG" = "true" ]; then
+    assert_file_exist .ddev/docker-compose.redis-commander_password.yaml
+  else
+    assert_file_not_exist .ddev/docker-compose.redis-commander_password.yaml
+  fi
+
   run curl -sfI http://${PROJNAME}.ddev.site:1358
   assert_success
   assert_output --partial "HTTP/1.1 200"
@@ -73,6 +81,23 @@ teardown() {
 
 @test "install from directory" {
   set -eu -o pipefail
+  echo "# ddev add-on get ${DIR} with project ${PROJNAME} in $(pwd)" >&3
+  run ddev add-on get "${DIR}"
+  assert_success
+  run ddev restart -y
+  assert_success
+  health_checks
+}
+
+@test "install from directory with optimized Redis" {
+  set -eu -o pipefail
+
+  export HAS_OPTIMIZED_CONFIG=true
+
+  run ddev dotenv set .ddev/.env.redis --redis-optimized=true
+  assert_success
+  assert_file_exist .ddev/.env.redis
+
   echo "# ddev add-on get ${DIR} with project ${PROJNAME} in $(pwd)" >&3
   run ddev add-on get "${DIR}"
   assert_success
