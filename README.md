@@ -13,7 +13,7 @@ This add-on integrates Redis Commander into your [DDEV](https://ddev.com/) proje
 
 ## Requirements
 
-Before installing this add-on, the Redis service must be available:
+Before installing this add-on, the [Redis service](https://github.com/ddev/ddev-redis) must be available:
 
 ```bash
 ddev add-on get ddev/ddev-redis
