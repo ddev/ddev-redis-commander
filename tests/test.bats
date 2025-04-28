@@ -1,56 +1,93 @@
+#!/usr/bin/env bats
+
+# Bats is a testing framework for Bash
+# Documentation https://bats-core.readthedocs.io/en/stable/
+# Bats libraries documentation https://github.com/ztombol/bats-docs
+
+# For local tests, install bats-core, bats-assert, bats-file, bats-support
+# And run this in the add-on root directory:
+#   bats ./tests/test.bats
+# To exclude release tests:
+#   bats ./tests/test.bats --filter-tags '!release'
+# For debugging:
+#   bats ./tests/test.bats --show-output-of-passing-tests --verbose-run --print-output-on-failure
+
 setup() {
   set -eu -o pipefail
-  brew_prefix=$(brew --prefix)
-  load "${brew_prefix}/lib/bats-support/load.bash"
-  load "${brew_prefix}/lib/bats-assert/load.bash"
 
-  export DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )/.."
-  export TESTDIR=~/tmp/testrediscommander
-  mkdir -p $TESTDIR
-  export PROJNAME=test-redis-commander
+  # Override this variable for your add-on:
+  export GITHUB_REPO=ddev/ddev-redis-commander
+
+  TEST_BREW_PREFIX="$(brew --prefix 2>/dev/null || true)"
+  export BATS_LIB_PATH="${BATS_LIB_PATH}:${TEST_BREW_PREFIX}/lib:/usr/lib/bats"
+  bats_load_library bats-assert
+  bats_load_library bats-file
+  bats_load_library bats-support
+
+  export DIR="$(cd "$(dirname "${BATS_TEST_FILENAME}")/.." >/dev/null 2>&1 && pwd)"
+  export PROJNAME="test-$(basename "${GITHUB_REPO}")"
+  mkdir -p ~/tmp
+  export TESTDIR=$(mktemp -d ~/tmp/${PROJNAME}.XXXXXX)
   export DDEV_NONINTERACTIVE=true
-  ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
+  export DDEV_NO_INSTRUMENTATION=true
+  ddev delete -Oy "${PROJNAME}" >/dev/null 2>&1 || true
   cd "${TESTDIR}"
-  ddev config --project-name=${PROJNAME}
-  ddev start -y >/dev/null
-  # Redis add-on is required for Redis Commander
-  ddev add-on get ddev/ddev-redis >/dev/null
-}
+  run ddev config --project-name="${PROJNAME}" --project-tld=ddev.site
+  assert_success
+  run ddev start -y
+  assert_success
 
-teardown() {
-  set -eu -o pipefail
-  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  ddev delete -Oy ${PROJNAME} >/dev/null 2>&1
-  [ "${TESTDIR}" != "" ] && rm -rf ${TESTDIR}
+  # Redis add-on is required for Redis Commander
+  run ddev add-on get ddev/ddev-redis
+  assert_success
 }
 
 health_checks() {
-  set +u # bats-assert has unset variables so turn off unset check
-  # ddev restart is required because we have done `ddev get` on a new service
-  run ddev restart
+  run curl -sfI http://${PROJNAME}.ddev.site:1358
   assert_success
-  # Make sure we can hit the HTTP port successfully
-  URL=$(ddev describe -j ${PROJNAME} | jq -r .raw.services.\"redis-commander\".http_url)
-  curl -s --fail "${URL}" | grep "<title>Redis Commander: Home"
+  assert_output --partial "HTTP/1.1 200"
+
+  run curl -sf http://${PROJNAME}.ddev.site:1358
+  assert_success
+  assert_output --partial "<title>Redis Commander: Home"
+
+  run curl -sfI https://${PROJNAME}.ddev.site:1359
+  assert_success
+  assert_output --partial "HTTP/2 200"
+
+  run curl -sf https://${PROJNAME}.ddev.site:1359
+  assert_success
+  assert_output --partial "<title>Redis Commander: Home"
+
   # Make sure `ddev redis-commander` works
   DDEV_DEBUG=true run ddev redis-commander
   assert_success
   assert_output --partial "FULLURL https://${PROJNAME}.ddev.site:1359"
 }
 
+teardown() {
+  set -eu -o pipefail
+  ddev delete -Oy ${PROJNAME} >/dev/null 2>&1
+  [ "${TESTDIR}" != "" ] && rm -rf ${TESTDIR}
+}
+
 @test "install from directory" {
   set -eu -o pipefail
-  cd ${TESTDIR}
-  echo "# ddev add-on get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev add-on get ${DIR}
+  echo "# ddev add-on get ${DIR} with project ${PROJNAME} in $(pwd)" >&3
+  run ddev add-on get "${DIR}"
+  assert_success
+  run ddev restart -y
+  assert_success
   health_checks
 }
 
 # bats test_tags=release
 @test "install from release" {
   set -eu -o pipefail
-  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev add-on get ddev/ddev-redis-commander with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev add-on get ddev/ddev-redis-commander
+  echo "# ddev add-on get ${GITHUB_REPO} with project ${PROJNAME} in $(pwd)" >&3
+  run ddev add-on get "${GITHUB_REPO}"
+  assert_success
+  run ddev restart -y
+  assert_success
   health_checks
 }

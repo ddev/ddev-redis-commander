@@ -17,13 +17,15 @@ on:
         required: false
         default: false
 
-# This is required for "gautamkrishnar/keepalive-workflow"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
-  actions: write
+  contents: read
 
 jobs:
   tests:
-
     strategy:
       matrix:
         ddev_version: [stable, HEAD]
