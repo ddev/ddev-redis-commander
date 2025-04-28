@@ -1,26 +1,18 @@
 name: redis-commander
 
 dependencies:
-- redis
+  - redis
 
-# list of files and directories listed that are copied into project .ddev directory
 project_files:
-- docker-compose.redis-commander.yaml
-- docker-compose.redis-commander_norouter.yaml
-- commands/host/redis-commander
+  - docker-compose.redis-commander.yaml
+  - docker-compose.redis-commander_norouter.yaml
+  - commands/host/redis-commander
 
-
-pre_install_actions:
-  # Ensure we're on DDEV 1.23+. It's required for the `redis-commander` command (launch by port).
-  - |
-    #ddev-nodisplay
-    #ddev-description:Checking DDEV version
-    (ddev debug capabilities | grep corepack >/dev/null) || (echo "Please upgrade DDEV to v1.23+ to enable launching." && false)
+ddev_version_constraint: '>= v1.24.3'
 
 post_install_actions:
   - |
     #ddev-description:If router disabled, directly expose port
-    #
     if ( {{ contains "ddev-router" (list .DdevGlobalConfig.omit_containers | toString) }} ); then
       printf "#ddev-generated\nservices:\n  redis-commander:\n    ports:\n      - 1358:1358\n" > docker-compose.redis-commander_norouter.yaml
     fi
