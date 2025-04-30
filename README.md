@@ -38,6 +38,11 @@ After installation, make sure to commit the `.ddev` directory to version control
 
 ## Advanced Customization
 
+You may need to adjust the password depending on your Redis configuration:
+
+* A `docker-compose.redis-commander_password.yaml` file is automatically created on install, if we detect that Redis needs one.
+* By default, the password is set via `REDIS_PASSWORD=redis` in that file. If you modify it, be sure to remove the `#ddev-generated` comment to prevent your changes from being overwritten.
+
 To change the Docker image:
 
 ```bash
