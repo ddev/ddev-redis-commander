@@ -66,6 +66,6 @@ All customization options (use with caution):
 
 ## Credits
 
-**Originally Contributed by [@Graloth](https://github.com/Graloth) in [ddev-contrib](https://github.com/ddev/ddev-contrib/tree/master/docker-compose-services/redis-commander)**
+**Originally Contributed by [@Graloth](https://github.com/Graloth) in [ddev-contrib](https://github.com/ddev/ddev-contrib/tree/64b689730138aaecc9a0f0b72115dbf9f0dfe7a0/docker-compose-services/redis-commander)**
 
 **Maintained by [@julienloizelet](https://github.com/julienloizelet)**

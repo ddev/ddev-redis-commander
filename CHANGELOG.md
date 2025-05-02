@@ -11,6 +11,23 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) of this projec
 
 ---
 
+
+## [v1.4.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.3.0) - 2025-05-02
+[_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v1.3.0...v1.4.0)
+
+
+### Changed
+
+- Automatically handle Redis password on install if Redis needs one (see [#23](https://github.com/ddev/ddev-redis-commander/pull/23))
+- Use `#!/usr/bin/env bash` for `redis-commander` command (see [#24](https://github.com/ddev/ddev-redis-commander/pull/24))
+
+### Added
+
+- Add `REDIS_COMMANDER_DOCKER_IMAGE` variable to customize the Docker image (see [#24](https://github.com/ddev/ddev-redis-commander/pull/24))
+
+
+---
+
 ## [v1.3.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.3.0) - 2024-10-24
 [_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v1.2.0...v1.3.0)
 
