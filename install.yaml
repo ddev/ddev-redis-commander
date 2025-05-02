@@ -17,4 +17,21 @@ post_install_actions:
       printf "#ddev-generated\nservices:\n  redis-commander:\n    ports:\n      - 1358:1358\n" > docker-compose.redis-commander_norouter.yaml
     fi
   - |
+    #ddev-description:If Redis is optimized, set a password
+    if [ $(ddev dotenv get .ddev/.env.redis --redis-optimized 2>/dev/null) = "true" ]; then
+      printf "#ddev-generated\nservices:\n  redis-commander:\n    environment:\n      - REDIS_PASSWORD=redis\n" > docker-compose.redis-commander_password.yaml
+    fi
+  - |
     echo "You can now use 'ddev redis-commander' to launch Redis Commander UI"
+
+removal_actions:
+  - |
+    #ddev-description:Remove docker-compose.redis-commander_password.yaml file
+    file=docker-compose.redis-commander_password.yaml
+    if [ -f "${file}" ]; then
+      if grep -q '#ddev-generated' "${file}"; then
+        rm -f "${file}"
+      else
+        echo "Unwilling to remove '$DDEV_APPROOT/.ddev/${file}' because it does not have #ddev-generated in it; you can manually delete it if it is safe to delete."
+      fi
+    fi
