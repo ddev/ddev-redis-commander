@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## #ddev-generated: If you want to edit and own this file, remove this line.
 ## Description: Launch a browser with Redis Commander
@@ -20,4 +20,3 @@ if [ -z "$DDEV_REDIS_COMMANDER_PORT" ]; then
 fi
 
 ddev launch :"$DDEV_REDIS_COMMANDER_PORT"
-
