@@ -12,7 +12,7 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1) of this projec
 ---
 
 
-## [v1.4.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.3.0) - 2025-05-02
+## [v1.4.0](https://github.com/ddev/ddev-redis-commander/releases/tag/v1.4.0) - 2025-05-02
 [_Compare with previous release_](https://github.com/ddev/ddev-redis-commander/compare/v1.3.0...v1.4.0)
 
 
