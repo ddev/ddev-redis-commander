@@ -1,73 +1,70 @@
-[![tests](https://github.com/ddev/ddev-redis-commander/actions/workflows/tests.yml/badge.svg)](https://github.com/ddev/ddev-redis-commander/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
+[![add-on registry](https://img.shields.io/badge/DDEV-Add--on_Registry-blue)](https://addons.ddev.com)
+[![tests](https://github.com/ddev/ddev-redis-commander/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/ddev/ddev-redis-commander/actions/workflows/tests.yml?query=branch%3Amain)
+[![last commit](https://img.shields.io/github/last-commit/ddev/ddev-redis-commander)](https://github.com/ddev/ddev-redis-commander/commits)
+[![release](https://img.shields.io/github/v/release/ddev/ddev-redis-commander)](https://github.com/ddev/ddev-redis-commander/releases/latest)
 
 ## Redis Commander
 
-This uses Redis Commander to provide a web interface to a redis service on DDEV.
+## Overview
+
+[Redis Commander](https://joeferner.github.io/redis-commander/) is a node.js web application used to view, edit, and manage a Redis database.
+
+This add-on integrates Redis Commander into your [DDEV](https://ddev.com/) project.
 
 ## Requirements
 
-Before installing this add-on, the Redis service must be available, and you have to use one of the following add-ons:
+Before installing this add-on, the [Redis service](https://github.com/ddev/ddev-redis) must be available:
 
-- [`ddev/ddev-redis` (Redis 6)](https://github.com/ddev/ddev-redis)
-- [`ddev/ddev-redis-7` (Redis 7)](https://github.com/ddev/ddev-redis-7)
-
-For DDEV v1.23.5 or above run 
-
-`ddev add-on get ddev/ddev-redis` or `ddev add-on get ddev/ddev-redis-7`
-
-For earlier versions of DDEV run 
-
-`ddev get ddev/ddev-redis` or `ddev get ddev/ddev-redis-7`
-
+```bash
+ddev add-on get ddev/ddev-redis
+```
 
 ## Installation
 
-For DDEV v1.23.5 or above run
-
 ```bash
 ddev add-on get ddev/ddev-redis-commander
-```
-
-For earlier versions of DDEV run
-
-```bash
-ddev get ddev/ddev-redis-commander
-```
-
-Then restart your project
-
-```bash
 ddev restart
 ```
 
+After installation, make sure to commit the `.ddev` directory to version control.
+
 ## Usage
 
-Access the Redis Commander web interface by running `ddev redis-commander`.
+| Command | Description |
+| ------- | ----------- |
+| `ddev redis-commander` | Open Redis Commander in your browser (`https://<project>.ddev.site:1359`) |
+| `ddev describe` | View service status and used ports for Redis Commander |
+| `ddev logs -s redis-commander` | Check Redis Commander logs |
 
-### Redis 7 password
+## Advanced Customization
 
-At the time of writing, Redis 7 requires a password to connect to it.
+You may need to adjust the password depending on your Redis configuration:
 
-In order to connect to Redis 7, you have to set the `REDIS_PASSWORD` environment variable in the `redis-commander` 
-service. 
+* A `docker-compose.redis-commander_password.yaml` file is automatically created on install, if we detect that Redis needs one.
+* By default, the password is set via `REDIS_PASSWORD=redis` in that file. If you modify it, be sure to remove the `#ddev-generated` comment to prevent your changes from being overwritten.
 
-One way of doing this is to create a `docker-compose.redis_password.yaml` file with the following content:
+To change the Docker image:
 
-```yaml
-services:
-    redis-commander:
-        environment:
-            - REDIS_PASSWORD=redis
+```bash
+ddev dotenv set .ddev/.env.redis-commander --redis-commander-docker-image=ghcr.io/joeferner/redis-commander:latest
+ddev add-on get ddev/ddev-redis-commander
+ddev restart
 ```
-You may have to adjust the password according to your Redis 7 configuration (`redis` is the default one).
 
-Then, run `ddev restart` to apply the changes.
+Make sure to commit the `.ddev/.env.redis-commander` file to version control.
 
+All customization options (use with caution):
+
+| Variable | Flag | Default |
+| -------- | ---- | ------- |
+| `REDIS_COMMANDER_DOCKER_IMAGE` | `--redis-commander-docker-image` | `ghcr.io/joeferner/redis-commander:latest` |
 
 ## Links
 
 * [Multiplatform Images](https://github.com/joeferner/redis-commander/pkgs/container/redis-commander)
 * GitHub repo: [joeferner/redis-commander](https://github.com/joeferner/redis-commander)
+
+## Credits
 
 **Originally Contributed by [@Graloth](https://github.com/Graloth) in [ddev-contrib](https://github.com/ddev/ddev-contrib/tree/master/docker-compose-services/redis-commander)**
 
