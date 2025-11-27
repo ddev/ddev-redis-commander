@@ -1,10 +1,12 @@
 name: tests
 on:
   pull_request:
+    paths-ignore:
+      - "**.md"
   push:
     branches: [ main ]
     paths-ignore:
-      - '**.md'
+      - "**.md"
 
   schedule:
     - cron: '06 07 * * *'

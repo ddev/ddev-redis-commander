@@ -8,7 +8,7 @@ project_files:
   - docker-compose.redis-commander_norouter.yaml
   - commands/host/redis-commander
 
-ddev_version_constraint: '>= v1.24.3'
+ddev_version_constraint: '>= v1.24.10'
 
 post_install_actions:
   - |
@@ -23,6 +23,8 @@ post_install_actions:
     fi
   - |
     echo "You can now use 'ddev redis-commander' to launch Redis Commander UI"
+    echo ""
+    echo "⚠️ This add-on is no longer maintained, use https://github.com/ddev/ddev-redis-insight instead."
 
 removal_actions:
   - |

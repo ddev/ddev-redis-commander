@@ -36,7 +36,7 @@ jobs:
       - name: Check version ${{ env.VERSION_NUMBER }} consistency in files
         # Check CHANGELOG.md
         run: |
-          
+
           # Check top ## [VERSION_NUMBER](GITHUB_URL/releases/tag/VERSION_NUMBER) - yyyy-mm-dd in CHANGELOG.md
           CURRENT_DATE=$(date +'%Y-%m-%d')
           echo $CURRENT_DATE
@@ -49,7 +49,7 @@ jobs:
               echo "CHANGELOG VERSION KO"
               exit 1
           fi
-          
+
           # Check top [_Compare with previous release_](GITHUB_URL/compare/LAST_TAG...VERSION_NUMBER) in CHANGELOG.md
           COMPARISON=$(grep -oP "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/\K(.*)$" CHANGELOG.md | head -1)
           LAST_TAG=$(curl -Ls -o /dev/null -w %{url_effective} $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/latest | grep -oP "\/tag\/\K(.*)$")

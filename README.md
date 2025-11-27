@@ -3,7 +3,17 @@
 [![last commit](https://img.shields.io/github/last-commit/ddev/ddev-redis-commander)](https://github.com/ddev/ddev-redis-commander/commits)
 [![release](https://img.shields.io/github/v/release/ddev/ddev-redis-commander)](https://github.com/ddev/ddev-redis-commander/releases/latest)
 
-## Redis Commander
+## Redis Commander (archived)
+
+This add-on has been archived and is no longer actively maintained.
+
+Use the [ddev/ddev-redis-insight](https://github.com/ddev/ddev-redis-insight) add-on instead, which provides a more modern and feature-rich interface for managing Redis databases:
+
+```bash
+ddev add-on remove ddev/ddev-redis-commander
+ddev add-on get ddev/ddev-redis-insight
+ddev restart
+```
 
 ## Overview
 
